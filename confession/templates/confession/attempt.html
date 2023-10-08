@@ -62,20 +62,24 @@
         <h2>CEU Confession Wall</h2>
       </div>
 
+      {% block input %}
       <!-- tweetbox starts -->
       <div class="tweetBox">
-        <form>
+        <form method="POST" enctype="multipart/form-data" action="{% url 'home' %}">
+          {% csrf_token %}
           <div class="tweetbox__input">
             <img
               src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
               alt=""
             />
-            <input type="text" placeholder="What's happening?" />
+            {{ form.as_p }}
+            <input type="submit" value="Submit" placeholder="What's happening?" />
           </div>
-          <button class="tweetBox__tweetButton">Submit</button>
+          <!-- <a class="tweetBox__tweetButton" href="#">Submit</a> -->
         </form>
       </div>
       <!-- tweetbox ends -->
+      {% endblock %}
 
 
 
@@ -83,7 +87,6 @@
       <!-- post starts -->
       
       {% for submissions in confessions %}
-
         <div class="post">
           <div class="post__avatar">
             <img
